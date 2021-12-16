@@ -7,7 +7,7 @@ if len(sys.argv) < 2:
     print("ERROR: expected arch: 32bit or 64bit")
     sys.exit(1)
 
-if str(sys.argv[1]) == "--help" or str(sys.argv[1]) == "-h":
+if str(sys.argv[1]) in ["--help", "-h"]:
     print("Usage: read_files.py [32bit|64bit] <files.cfg path>")
     sys.exit(1)
 
@@ -42,9 +42,9 @@ else:
 def filter_descriptors(entry):
     if 'archive' in entry:
         return False
-    if not 'buildtype' in entry:
+    if 'buildtype' not in entry:
         return False
-    if not 'dev' in entry['buildtype']:
+    if 'dev' not in entry['buildtype']:
         return False
     if ('arch' in entry) and (entry['arch'] != target_arch):
         return False
